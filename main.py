@@ -2,10 +2,11 @@ from message import get_chat_id
 from monitor import monitor
 import toml
 import sys
-
+import os
 
 def load_config():
-    config_location = "config.toml"
+    absolute_path = os.path.abspath(__file__)
+    config_location = os.path.dirname(absolute_path)+"\\config.toml"
     with open(config_location) as file:
         config = toml.load(file)  # Make a dict of the config values
 
@@ -26,11 +27,9 @@ def load_config():
 
     return config
 
-
 def main():
     config = load_config()
     monitor(config)
-
 
 if __name__ == "__main__":
     main()
